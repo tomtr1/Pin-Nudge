@@ -12,6 +12,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { createSupabaseAdminRepository, createSupabaseUserRepository } from "@/lib/data/supabase-repo";
+import { createSupabaseBearerClient, createSupabaseStatelessClient } from "@/lib/supabase/server";
 
 function loadEnvFile() {
   if (!existsSync(".env.local")) return;
@@ -194,6 +195,25 @@ describe.skipIf(!available)("Supabase RLS and storage isolation", () => {
     await repo.releaseStripeEvent(id);
     expect(await repo.claimStripeEvent(id, "test")).toBe(true);
     await repo.releaseStripeEvent(id);
+  });
+
+  it("bearer-token clients (mobile API) are scoped by RLS like cookie sessions", async () => {
+    const { data } = await mallory.auth.getSession();
+    const token = data.session!.access_token;
+    const bearer = createSupabaseBearerClient(token);
+    const { data: who } = await createSupabaseStatelessClient().auth.getUser(token);
+    expect(who.user?.id).toBe(ids.mallory);
+    const repo = createSupabaseUserRepository(bearer, ids.mallory);
+    expect(await repo.getProduct(ids.product)).toBeNull();
+    expect(await repo.getCampaign(ids.campaign)).toBeNull();
+    // Even if the server mistakenly passed alice's id, RLS still filters by the token's user.
+    const confused = createSupabaseUserRepository(bearer, ids.alice);
+    expect(await confused.getProduct(ids.product)).toBeNull();
+    const file = await bearer.storage.from("product-images").download(ids.imagePath);
+    expect(file.data).toBeNull();
+    // A forged token is rejected outright.
+    const forged = await createSupabaseStatelessClient().auth.getUser(`${token.slice(0, -4)}AAAA`);
+    expect(forged.data.user).toBeNull();
   });
 
   it("deleting a product keeps campaigns but unlinks them", async () => {

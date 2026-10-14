@@ -19,7 +19,34 @@ function supabaseConfigured() {
   return Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
 }
 
+/**
+ * Optional CORS for the JSON API, for running the mobile app's web build
+ * during development. Native iOS requests don't need CORS. Off unless
+ * API_CORS_ORIGINS is set (comma-separated exact origins).
+ */
+function corsHeaders(request: NextRequest): Record<string, string> | null {
+  const origin = request.headers.get("origin");
+  const allowed = (process.env.API_CORS_ORIGINS ?? "").split(",").map((o) => o.trim()).filter(Boolean);
+  if (!origin || !allowed.includes(origin) || !request.nextUrl.pathname.startsWith("/api/")) return null;
+  return {
+    "Access-Control-Allow-Origin": origin,
+    "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE, OPTIONS",
+    "Access-Control-Allow-Headers": "Authorization, Content-Type",
+    "Access-Control-Max-Age": "600",
+    Vary: "Origin",
+  };
+}
+
 export async function proxy(request: NextRequest) {
+  const cors = corsHeaders(request);
+  if (cors && request.method === "OPTIONS") return new NextResponse(null, { status: 204, headers: cors });
+  if (request.nextUrl.pathname.startsWith("/api/mobile/")) {
+    // The mobile API authenticates with bearer tokens, not cookies.
+    const response = NextResponse.next();
+    for (const [k, v] of Object.entries(cors ?? {})) response.headers.set(k, v);
+    return response;
+  }
+
   let response = NextResponse.next({ request });
   let signedIn = false;
 
@@ -51,6 +78,7 @@ export async function proxy(request: NextRequest) {
     return redirect;
   }
 
+  for (const [k, v] of Object.entries(cors ?? {})) response.headers.set(k, v);
   return response;
 }
 
