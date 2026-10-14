@@ -140,7 +140,7 @@ export default async function SettingsPage() {
                       <p className="text-sm text-muted-foreground">
                         {provider === "pinterest"
                           ? "Publishing and analytics import require Pinterest's official API and app approval. Until then, export pins and post them manually."
-                          : "Listing import requires Etsy's official API and approval. Until then, enter product details yourself — PinNudge never scrapes Etsy."}
+                          : `Listing import requires Etsy's official API and approval. Until then, enter product details yourself — ${brand.name} never scrapes Etsy.`}
                       </p>
                     </div>
                     <Badge tone={row?.status === "connected" ? "accent" : "neutral"}>{row?.status === "connected" ? "Connected" : "Not connected"}</Badge>
@@ -153,7 +153,7 @@ export default async function SettingsPage() {
           <Card id="privacy" className="scroll-mt-6">
             <CardHeader>
               <CardTitle>Privacy &amp; data</CardTitle>
-              <CardDescription>Download everything PinNudge stores about you, or delete your account.</CardDescription>
+              <CardDescription>Download everything {brand.name} stores about you, or delete your account.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <Button asChild variant="secondary">

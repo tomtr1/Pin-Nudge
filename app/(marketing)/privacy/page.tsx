@@ -13,7 +13,7 @@ export default function PrivacyPage() {
         <DraftLegalNotice />
       </div>
       <Prose>
-        <h2>What PinNudge stores</h2>
+        <h2>What {brand.name} stores</h2>
         <ul>
           <li>Account data: your email address and an encrypted password managed by the authentication provider.</li>
           <li>Profile and preferences you enter during onboarding or in settings (store name, links, audience, language, goals).</li>
@@ -21,7 +21,7 @@ export default function PrivacyPage() {
           <li>Campaigns, marketing angles and pins, including any edits you make.</li>
           <li>Metrics you enter manually for your pins, labelled as manually reported.</li>
           <li>Usage records (for example, how many campaigns you generated) to enforce plan limits and estimate costs.</li>
-          <li>Subscription status and Stripe customer and subscription identifiers. Card details are handled by Stripe and never stored by PinNudge.</li>
+          <li>Subscription status and Stripe customer and subscription identifiers. Card details are handled by Stripe and never stored by {brand.name}.</li>
         </ul>
 
         <h2>Service providers that may receive data</h2>
@@ -33,7 +33,7 @@ export default function PrivacyPage() {
         </ul>
         <p>The operator must list the actual providers, their locations and the legal basis for each transfer before launch.</p>
 
-        <h2>What PinNudge does not do</h2>
+        <h2>What {brand.name} does not do</h2>
         <ul>
           <li>It does not scrape Etsy or Pinterest, and does not access your Etsy or Pinterest accounts.</li>
           <li>It does not sell personal data or use it for advertising.</li>

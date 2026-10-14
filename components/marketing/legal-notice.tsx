@@ -1,11 +1,12 @@
 import { AlertTriangle } from "lucide-react";
 import { Notice } from "@/components/ui/misc";
+import { brand } from "@/lib/brand";
 
 export function DraftLegalNotice() {
   return (
     <Notice tone="warning" icon={<AlertTriangle />} title="Draft — requires legal review before public launch">
       This document is an initial placeholder written for the product prototype. It has not been reviewed by a lawyer and must be adapted to
-      the operating business, its jurisdiction and the services it actually uses before PinNudge accepts real customers.
+      the operating business, its jurisdiction and the services it actually uses before {brand.name} accepts real customers.
     </Notice>
   );
 }

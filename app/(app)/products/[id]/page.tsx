@@ -14,6 +14,7 @@ import { categoryLabel, VISUAL_STYLES } from "@/lib/constants";
 import { displayUrl } from "@/lib/validations/url";
 import { formatDate, pluralize } from "@/lib/utils";
 import { z } from "zod";
+import { brand } from "@/lib/brand";
 
 export const metadata: Metadata = { title: "Product" };
 
@@ -41,7 +42,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
       </nav>
       <PageHeader
         title={product.name}
-        description={product.isSample ? "Sample product for exploring PinNudge." : `Added ${formatDate(product.createdAt)}`}
+        description={product.isSample ? `Sample product for exploring ${brand.name}.` : `Added ${formatDate(product.createdAt)}`}
         actions={
           <>
             <ProductActions product={product} campaignCount={campaigns.length} />

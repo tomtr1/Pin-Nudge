@@ -1,6 +1,27 @@
 import type { NextConfig } from "next";
 
+/**
+ * Content Security Policy (production only; the dev server needs eval for
+ * fast refresh). The browser never talks to Supabase, Stripe or the AI
+ * provider directly — all of that happens server-side — so connections are
+ * limited to this origin. Next.js inline bootstrap scripts require
+ * 'unsafe-inline' unless nonces are introduced.
+ */
+const csp = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline'",
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data: blob:",
+  "font-src 'self' data:",
+  "connect-src 'self'",
+  "frame-ancestors 'none'",
+  "base-uri 'self'",
+  "form-action 'self' https://checkout.stripe.com https://billing.stripe.com",
+  "object-src 'none'",
+].join("; ");
+
 const securityHeaders = [
+  ...(process.env.NODE_ENV === "production" ? [{ key: "Content-Security-Policy", value: csp }] : []),
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "X-Frame-Options", value: "DENY" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },

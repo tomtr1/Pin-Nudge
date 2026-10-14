@@ -15,6 +15,7 @@ import { requireUserContext } from "@/lib/auth/session";
 import { minimumPlanFor } from "@/lib/billing/plans";
 import { getEntitlement } from "@/lib/billing/usage";
 import { formatDate } from "@/lib/utils";
+import { brand } from "@/lib/brand";
 
 export const metadata: Metadata = { title: "Analytics" };
 
@@ -103,8 +104,8 @@ export default async function AnalyticsPage() {
     <>
       <PageHeader title="Analytics" description="Results you record for your pins, and what they suggest." />
       <Notice tone="info" className="mb-6" icon={<BarChart3 />}>
-        PinNudge isn't connected to Pinterest, so all figures here are <strong>manually reported</strong> by you. Clicks are not linked to Etsy sales —
-        PinNudge has no data that could attribute a sale to a pin.
+        {brand.name} isn't connected to Pinterest, so all figures here are <strong>manually reported</strong> by you. Clicks are not linked to Etsy sales —
+        {brand.name} has no data that could attribute a sale to a pin.
       </Notice>
 
       <div className="grid gap-6 lg:grid-cols-[1fr_340px]">

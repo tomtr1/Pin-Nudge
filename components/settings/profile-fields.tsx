@@ -1,6 +1,7 @@
 import { Field, Input, Select, Textarea } from "@/components/ui/input";
 import { LANGUAGES, MARKETING_GOALS, PRODUCT_CATEGORIES, VISUAL_STYLES } from "@/lib/constants";
 import type { Profile } from "@/types/domain";
+import { brand } from "@/lib/brand";
 
 type Errors = Record<string, string> | undefined;
 
@@ -45,7 +46,7 @@ export function ProfileFields({ profile, errors, sections = "all" }: { profile: 
           label="Pinterest profile URL"
           htmlFor="pinterestProfileUrl"
           optional
-          hint="Saved as a reference only. PinNudge doesn't connect to your Pinterest account or read its analytics."
+          hint={`Saved as a reference only. ${brand.name} doesn't connect to your Pinterest account or read its analytics.`}
           error={e("pinterestProfileUrl")}
         >
           <Input id="pinterestProfileUrl" name="pinterestProfileUrl" type="url" inputMode="url" placeholder="https://www.pinterest.com/yourprofile" defaultValue={profile?.pinterestProfileUrl ?? ""} aria-invalid={Boolean(e("pinterestProfileUrl"))} />

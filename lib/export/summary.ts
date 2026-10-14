@@ -38,7 +38,7 @@ export function campaignSummaryMarkdown(c: CampaignWithDetails, filenames: strin
 
   lines.push("---", "", `Exported from ${brand.name}. ${brand.disclaimer}`, "");
   lines.push(
-    "Keyword suggestions are ideas, not measured search volumes. Uploading these files to Pinterest is a manual step; PinNudge has not published anything on your behalf.",
+    `Keyword suggestions are ideas, not measured search volumes. Uploading these files to Pinterest is a manual step; ${brand.name} has not published anything on your behalf.`,
   );
   return lines.join("\n");
 }

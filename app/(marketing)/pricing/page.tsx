@@ -4,8 +4,9 @@ import { PricingCards } from "@/components/marketing/pricing-cards";
 import { Table, TBody, TD, TH, THead, TR } from "@/components/ui/table";
 import { PLAN_ORDER, PLANS } from "@/lib/billing/plans";
 import { TEMPLATE_META } from "@/lib/pins/design";
+import { brand } from "@/lib/brand";
 
-export const metadata: Metadata = { title: "Pricing", description: "PinNudge plans and pricing." };
+export const metadata: Metadata = { title: "Pricing", description: `${brand.name} plans and pricing.` };
 
 const yes = <Check className="size-4 text-accent" aria-label="Included" />;
 const no = <Minus className="size-4 text-muted-foreground" aria-label="Not included" />;

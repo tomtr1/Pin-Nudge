@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { AlertTriangle, FlaskConical, HardDrive } from "lucide-react";
 import type { Entitlement } from "@/lib/billing/entitlements";
+import { brand } from "@/lib/brand";
 
 /** Persistent, honest labels for non-production modes and billing problems. */
 export function StatusBanners({ dataMode, aiMode, entitlement }: { dataMode: string; aiMode: "live" | "demo"; entitlement: Entitlement }) {
@@ -10,7 +11,7 @@ export function StatusBanners({ dataMode, aiMode, entitlement }: { dataMode: str
         <div className="flex items-center gap-2 border-b border-info/20 bg-info-soft px-4 py-2 text-[13px] text-info sm:px-6">
           <HardDrive className="size-4 shrink-0" aria-hidden />
           <span>
-            <strong className="font-semibold">Local demo mode.</strong> Data is stored in a file on this server. Connect Supabase before using PinNudge with real customers.
+            <strong className="font-semibold">Local demo mode.</strong> Data is stored in a file on this server. Connect Supabase before using {brand.name} with real customers.
           </span>
         </div>
       ) : null}

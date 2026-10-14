@@ -16,7 +16,7 @@ import { brand } from "@/lib/brand";
 
 const steps = [
   { title: "Add your product", body: "Enter your listing details once, upload your own product images and paste your Etsy link as the destination." },
-  { title: "Choose distinct angles", body: "PinNudge suggests genuinely different audiences and messages — beginners, students, gift-givers — not just new colours." },
+  { title: "Choose distinct angles", body: `${brand.name} suggests genuinely different audiences and messages — beginners, students, gift-givers — not just new colours.` },
   { title: "Review every pin", body: "Each pin comes with a title, description, keywords, overlay text and a template. Edit anything, regenerate one pin at a time." },
   { title: "Export and plan", body: "Download real 1000×1500 PNGs, a CSV of your copy and a campaign summary. Plan publishing dates in the calendar." },
 ];
@@ -32,27 +32,27 @@ const features = [
 
 const faqs = [
   {
-    q: "Does PinNudge post to Pinterest for me?",
-    a: "Not in this version. You export your pins and upload them to Pinterest yourself, then mark them as published in PinNudge. We will only offer automatic publishing once an official, authorised Pinterest integration is in place.",
+    q: `Does ${brand.name} post to Pinterest for me?`,
+    a: `Not in this version. You export your pins and upload them to Pinterest yourself, then mark them as published in ${brand.name}. We will only offer automatic publishing once an official, authorised Pinterest integration is in place.`,
   },
   {
     q: "Does it read my Etsy listings automatically?",
-    a: "No. PinNudge does not scrape Etsy. You paste your listing link as the destination URL and enter or confirm the product details yourself. That keeps your data accurate and respects Etsy's rules.",
+    a: `No. ${brand.name} does not scrape Etsy. You paste your listing link as the destination URL and enter or confirm the product details yourself. That keeps your data accurate and respects Etsy's rules.`,
   },
   {
     q: "Is the copy written by AI?",
-    a: "Yes, when the server is connected to an AI provider. Every pin is a draft for you to review and edit. If AI isn't configured, PinNudge runs in demo mode and clearly labels the results as sample content.",
+    a: `Yes, when the server is connected to an AI provider. Every pin is a draft for you to review and edit. If AI isn't configured, ${brand.name} runs in demo mode and clearly labels the results as sample content.`,
   },
   {
     q: "Will this guarantee more traffic or sales?",
-    a: "No tool can promise that. PinNudge helps you produce more varied, consistent content and shows you what your own recorded results suggest. It never claims a pin caused an Etsy sale.",
+    a: `No tool can promise that. ${brand.name} helps you produce more varied, consistent content and shows you what your own recorded results suggest. It never claims a pin caused an Etsy sale.`,
   },
   {
     q: "Can I cancel any time?",
     a: "Yes. Paid plans are monthly subscriptions managed through Stripe's billing portal. You keep access until the end of the period you've paid for.",
   },
   {
-    q: "Is PinNudge affiliated with Pinterest or Etsy?",
+    q: `Is ${brand.name} affiliated with Pinterest or Etsy?`,
     a: brand.disclaimer,
   },
 ];
@@ -107,7 +107,7 @@ export default function LandingPage() {
             ))}
           </div>
           <p className="mt-10 text-center text-xs text-muted-foreground">
-            Illustrative examples for a fictional budget planner, rendered with PinNudge templates.
+            Illustrative examples for a fictional budget planner, rendered with {brand.name} templates.
           </p>
         </div>
       </section>
@@ -118,7 +118,7 @@ export default function LandingPage() {
           <h2 className="text-2xl font-semibold tracking-tight">One product. Many audiences. A plan you can actually keep.</h2>
           <p className="mt-4 leading-relaxed text-muted-foreground">
             A single digital planner can help beginners, students, families and savers — but each of them searches Pinterest differently.
-            PinNudge turns one listing into a campaign of distinct angles, ready-to-edit pins and export files, then helps you see which messages
+            {brand.name} turns one listing into a campaign of distinct angles, ready-to-edit pins and export files, then helps you see which messages
             are earning outbound clicks so your next campaign is better than the last.
           </p>
         </div>
@@ -155,7 +155,7 @@ export default function LandingPage() {
           <div className="mt-12 flex flex-wrap items-start gap-3 rounded-lg border border-border bg-surface p-5 text-sm">
             <ShieldCheck className="mt-0.5 size-5 text-accent" aria-hidden />
             <p className="max-w-3xl text-muted-foreground">
-              <span className="font-medium text-foreground">Honest by design.</span> PinNudge never invents analytics, search volumes or results.
+              <span className="font-medium text-foreground">Honest by design.</span> {brand.name} never invents analytics, search volumes or results.
               Metrics you enter are labelled as manually reported, sample content is labelled as sample, and nothing is marked “published” unless you did it.
             </p>
           </div>
@@ -167,7 +167,7 @@ export default function LandingPage() {
         <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Simple monthly pricing</h2>
-            <p className="mt-2 text-muted-foreground">Start free. Upgrade when PinNudge earns its place in your week.</p>
+            <p className="mt-2 text-muted-foreground">Start free. Upgrade when {brand.name} earns its place in your week.</p>
           </div>
           <Link href="/pricing" className="inline-flex items-center gap-1 text-sm font-medium text-accent hover:underline">
             Compare plans <ArrowRight className="size-4" />

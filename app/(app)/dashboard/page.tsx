@@ -13,6 +13,7 @@ import { AddSampleProductButton } from "@/components/products/sample-button";
 import { requireUserContext } from "@/lib/auth/session";
 import { getAccountUsage } from "@/lib/billing/usage";
 import { formatDate, pluralize } from "@/lib/utils";
+import { brand } from "@/lib/brand";
 
 export const metadata: Metadata = { title: "Dashboard" };
 
@@ -161,7 +162,7 @@ export default async function DashboardPage({ searchParams }: { searchParams: Pr
                     </li>
                   ))}
                 </ul>
-                <p className="mt-2 text-xs text-muted-foreground">Planned dates are reminders. PinNudge doesn't post to Pinterest automatically.</p>
+                <p className="mt-2 text-xs text-muted-foreground">Planned dates are reminders. {brand.name} doesn't post to Pinterest automatically.</p>
               </CardContent>
             </Card>
           ) : null}

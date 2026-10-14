@@ -14,6 +14,7 @@ import { Field, Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/misc";
 import { cn } from "@/lib/utils";
 import type { Pin } from "@/types/domain";
+import { brand } from "@/lib/brand";
 
 export type CalendarPin = Pin & { campaignName: string };
 
@@ -61,7 +62,7 @@ function PinDialog({ pin, onClose }: { pin: CalendarPin; onClose: () => void }) 
           <PinThumb pinId={pin.id} version={pin.updatedAt} alt={pin.altText || pin.title} />
           <div className="space-y-4">
             <PinStatusBadge status={pin.status} />
-            <Field label="Planned date" htmlFor="planned" hint="A reminder for you. PinNudge doesn't post automatically.">
+            <Field label="Planned date" htmlFor="planned" hint={`A reminder for you. ${brand.name} doesn't post automatically.`}>
               <div className="flex gap-2">
                 <Input id="planned" type="date" value={date} onChange={(e) => setDate(e.target.value)} />
                 <Button variant="secondary" disabled={pending || !date || date === pin.plannedFor} onClick={() => run(() => setPlannedDateAction(pin.id, date), "Date updated")}>

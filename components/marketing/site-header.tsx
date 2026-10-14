@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { Logo } from "@/components/brand/logo";
 import { Button } from "@/components/ui/button";
+import { brand } from "@/lib/brand";
 
 export function SiteHeader({ signedIn }: { signedIn: boolean }) {
   return (
     <header className="sticky top-0 z-40 border-b border-border/70 bg-background/90 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
-        <Link href="/" aria-label="PinNudge home" className="rounded-md">
+        <Link href="/" aria-label={`${brand.name} home`} className="rounded-md">
           <Logo />
         </Link>
         <nav aria-label="Main" className="hidden items-center gap-6 text-sm text-muted-foreground md:flex">

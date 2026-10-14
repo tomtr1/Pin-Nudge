@@ -7,6 +7,7 @@ import { getAccountUsage, nextPlanWithHigherLimit } from "@/lib/billing/usage";
 import { MAX_IMAGES_PER_PRODUCT, sniffImage } from "@/lib/storage/uploads";
 import { fieldErrors, productInputSchema } from "@/lib/validations/schemas";
 import type { Product } from "@/types/domain";
+import { brand } from "@/lib/brand";
 
 function productFromForm(formData: FormData) {
   return {
@@ -136,7 +137,7 @@ export async function addSampleProductAction(): Promise<ActionResult<{ id: strin
     const product = await repo.createProduct({
       name: "Minimalist Monthly Budget Planner (sample)",
       description:
-        "Sample product for exploring PinNudge. A printable and digital monthly budget planner with income and expense trackers, a savings goal page and a debt payoff tracker.",
+        `Sample product for exploring ${brand.name}. A printable and digital monthly budget planner with income and expense trackers, a savings goal page and a debt payoff tracker.`,
       category: "spreadsheet",
       targetAudience: "People who want a simple way to manage their monthly money",
       mainBenefit: "See where your money goes each month in one calm, simple layout",

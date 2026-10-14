@@ -37,6 +37,7 @@ import type { CampaignWithDetails, Pin } from "@/types/domain";
 import { AngleStep } from "./angle-step";
 import { CampaignStatusBadge, PinStatusBadge, SourceBadge } from "./status-badge";
 import { Stepper } from "./stepper";
+import { brand } from "@/lib/brand";
 
 interface Props {
   campaign: CampaignWithDetails;
@@ -182,7 +183,7 @@ function ExportPanel({ campaign, zipExport }: { campaign: CampaignWithDetails; z
           <a href={`${base}?format=summary&scope=all`} download><FileText /> Campaign summary</a>
         </Button>
         <p className="pt-1 text-xs text-muted-foreground">
-          Upload pins to Pinterest yourself, then mark them as published here. PinNudge doesn't post on your behalf.
+          Upload pins to Pinterest yourself, then mark them as published here. {brand.name} doesn't post on your behalf.
         </p>
       </CardContent>
     </Card>

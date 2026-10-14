@@ -13,6 +13,7 @@ import { PRODUCT_CATEGORIES, VISUAL_STYLES } from "@/lib/constants";
 import { ACCEPT_ATTRIBUTE, MAX_IMAGES_PER_PRODUCT } from "@/lib/storage/uploads";
 import { isEtsyListingUrl, isEtsyUrl } from "@/lib/validations/url";
 import type { Product } from "@/types/domain";
+import { brand } from "@/lib/brand";
 
 export function ProductForm({ product, onSaved }: { product?: Product; onSaved?: (id: string) => void }) {
   const router = useRouter();
@@ -53,7 +54,7 @@ export function ProductForm({ product, onSaved }: { product?: Product; onSaved?:
       </Field>
       {isEtsyUrl(url) ? (
         <Notice tone="info" icon={<Info />}>
-          {isEtsyListingUrl(url) ? "Etsy listing link recognised." : "Etsy link recognised."} PinNudge doesn't import listing details automatically —
+          {isEtsyListingUrl(url) ? "Etsy listing link recognised." : "Etsy link recognised."} {brand.name} doesn't import listing details automatically —
           it only uses this link as your pins' destination. Please enter or confirm the product details below and upload your own images.
         </Notice>
       ) : null}

@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { BarChart3, CalendarDays, HelpCircle, LayoutDashboard, Megaphone, Menu, Package, Settings, X } from "lucide-react";
 import { Logo } from "@/components/brand/logo";
 import { cn } from "@/lib/utils";
+import { brand } from "@/lib/brand";
 
 const items = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -57,7 +58,7 @@ export function Sidebar({ footer }: { footer: React.ReactNode }) {
   return (
     <aside className="hidden w-60 shrink-0 flex-col border-r border-border bg-surface lg:flex">
       <div className="flex h-16 items-center px-5">
-        <Link href="/dashboard" aria-label="PinNudge dashboard">
+        <Link href="/dashboard" aria-label={`${brand.name} dashboard`}>
           <Logo />
         </Link>
       </div>

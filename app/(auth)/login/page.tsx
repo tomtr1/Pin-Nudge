@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Notice } from "@/components/ui/misc";
 import { getSessionUser } from "@/lib/auth/session";
 import { getDataMode } from "@/lib/env";
+import { brand } from "@/lib/brand";
 
 export const metadata: Metadata = { title: "Log in" };
 
@@ -25,7 +26,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
         {mode === "supabase" ? <LoginForm next={next} /> : mode === "local" ? <LocalDemoEntry /> : <SetupRequired />}
         {mode === "supabase" ? (
           <p className="text-center text-sm text-muted-foreground">
-            New to PinNudge? <Link href="/signup" className="text-accent hover:underline">Create an account</Link>
+            New to {brand.name}? <Link href="/signup" className="text-accent hover:underline">Create an account</Link>
           </p>
         ) : null}
       </CardContent>
