@@ -12,6 +12,19 @@ export const PRODUCT_CATEGORIES = [
   { value: "other", label: "Other digital product" },
 ] as const;
 
+/** Short labels printed on pins ("kicker" line). */
+export const CATEGORY_KICKERS: Record<string, string> = {
+  wall_art: "Printable wall art",
+  planner: "Digital planner",
+  notion_template: "Notion template",
+  canva_template: "Canva template",
+  spreadsheet: "Spreadsheet template",
+  invitation: "Printable invitation",
+  educational: "Printable worksheets",
+  productivity: "Productivity template",
+  other: "Digital download",
+};
+
 export const CATEGORY_VALUES = PRODUCT_CATEGORIES.map((c) => c.value) as [string, ...string[]];
 
 export function categoryLabel(value: string): string {

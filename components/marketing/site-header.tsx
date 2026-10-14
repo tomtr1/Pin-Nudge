@@ -5,29 +5,28 @@ import { brand } from "@/lib/brand";
 
 export function SiteHeader({ signedIn }: { signedIn: boolean }) {
   return (
-    <header className="sticky top-0 z-40 border-b border-border/70 bg-background/90 backdrop-blur">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
-        <Link href="/" aria-label={`${brand.name} home`} className="rounded-md">
+    <header className="sticky top-0 z-40 border-b border-border bg-surface">
+      <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between gap-4 px-4 sm:px-8">
+        <Link href="/" aria-label={`${brand.name} home`}>
           <Logo />
         </Link>
-        <nav aria-label="Main" className="hidden items-center gap-6 text-sm text-muted-foreground md:flex">
-          <Link href="/#how-it-works" className="hover:text-foreground">How it works</Link>
-          <Link href="/#features" className="hover:text-foreground">Features</Link>
-          <Link href="/pricing" className="hover:text-foreground">Pricing</Link>
-          <Link href="/#faq" className="hover:text-foreground">FAQ</Link>
-          <Link href="/help" className="hover:text-foreground">Help</Link>
+        <nav aria-label="Main" className="hidden items-center gap-8 text-[16px] font-medium md:flex">
+          <Link href="/#how-it-works" className="hover:underline hover:underline-offset-4">How it works</Link>
+          <Link href="/#features" className="hover:underline hover:underline-offset-4">Features</Link>
+          <Link href="/pricing" className="hover:underline hover:underline-offset-4">Pricing</Link>
+          <Link href="/help" className="hover:underline hover:underline-offset-4">Help</Link>
         </nav>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 sm:gap-4">
           {signedIn ? (
-            <Button asChild size="sm">
+            <Button asChild>
               <Link href="/dashboard">Open dashboard</Link>
             </Button>
           ) : (
             <>
-              <Button asChild variant="ghost" size="sm">
-                <Link href="/login">Log in</Link>
-              </Button>
-              <Button asChild size="sm">
+              <Link href="/login" className="text-[15px] font-medium hover:underline hover:underline-offset-4">
+                Log in
+              </Link>
+              <Button asChild className="h-11 px-5">
                 <Link href="/signup">Get started</Link>
               </Button>
             </>

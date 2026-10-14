@@ -2,7 +2,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 export const inputClass =
-  "flex h-9 w-full rounded-md border border-border-strong bg-surface px-3 py-1 text-sm text-foreground placeholder:text-muted-foreground/80 transition-colors focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-ring disabled:cursor-not-allowed disabled:opacity-60 aria-[invalid=true]:border-danger";
+  "flex h-10 w-full rounded-[3px] border border-[#c8c5ba] bg-surface px-3 py-1 text-[15px] text-foreground placeholder:text-muted-foreground/70 transition-colors hover:border-[#9c998f] focus-visible:border-foreground focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-ring disabled:cursor-not-allowed disabled:opacity-60 aria-[invalid=true]:border-danger";
 
 export const Input = React.forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTMLInputElement>>(
   ({ className, type = "text", ...props }, ref) => (
@@ -29,7 +29,7 @@ export const Select = React.forwardRef<HTMLSelectElement, React.SelectHTMLAttrib
 Select.displayName = "Select";
 
 export function Label({ className, ...props }: React.LabelHTMLAttributes<HTMLLabelElement>) {
-  return <label className={cn("text-sm font-medium text-foreground", className)} {...props} />;
+  return <label className={cn("text-sm font-semibold text-foreground", className)} {...props} />;
 }
 
 export function Field({

@@ -16,7 +16,7 @@ export default async function SignupPage() {
   return (
     <Card>
       <CardHeader>
-        <h1 className="text-xl font-semibold tracking-tight">Create your account</h1>
+        <h1 className="font-display text-4xl">Create your account</h1>
         <p className="text-sm text-muted-foreground">Start on the Free plan. You can upgrade later from settings.</p>
       </CardHeader>
       <CardContent className="space-y-4">

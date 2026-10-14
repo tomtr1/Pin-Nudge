@@ -7,7 +7,7 @@ import { getAdminRepository, type UserRepository } from "@/lib/data";
 import { NotFoundError } from "@/lib/data/errors";
 import type { PinPatch, PinWrite } from "@/lib/data/types";
 import { logger } from "@/lib/logger";
-import { COLOR_PRESETS, DEFAULT_DESIGN, normalizeDesign, TEMPLATE_META } from "@/lib/pins/design";
+import { BASIC_FONT_PRESETS, COLOR_PRESETS, DEFAULT_DESIGN, normalizeDesign, TEMPLATE_META } from "@/lib/pins/design";
 import { pinExportFilename } from "@/lib/validations/filenames";
 import type { PinEditInput } from "@/lib/validations/schemas";
 import {
@@ -73,13 +73,14 @@ function generationContext(
   };
 }
 
+// Indexes into COLOR_PRESETS: 0 cream, 1 sage, 2 blush, 3 sky, 4 butter, 5 night.
 const STYLE_PALETTES: Record<string, number[]> = {
-  minimal: [0, 5, 3],
+  minimal: [0, 3, 1],
   warm: [2, 4, 0],
-  bold: [1, 3, 2],
-  elegant: [1, 5, 4],
-  playful: [2, 3, 0],
-  earthy: [4, 0, 1],
+  bold: [5, 3, 2],
+  elegant: [0, 5, 2],
+  playful: [4, 2, 3],
+  earthy: [1, 4, 0],
 };
 
 /** Base design for a newly generated pin, varied per angle so a campaign isn't monotone. */
@@ -101,7 +102,10 @@ export function initialDesign(
     background: (useCustom && defaults.background) || preset.background,
     textColor: (useCustom && defaults.textColor) || preset.textColor,
     accentColor: (useCustom && defaults.accentColor) || preset.accentColor,
-    fontPreset: entitlement.plan.features.allFontPresets ? (defaults.fontPreset ?? "modern") : "modern",
+    fontPreset:
+      defaults.fontPreset && (entitlement.plan.features.allFontPresets || BASIC_FONT_PRESETS.includes(defaults.fontPreset))
+        ? defaults.fontPreset
+        : "editorial",
     imagePlacement: hasImage ? "auto" : "none",
     showStoreName: Boolean(profile?.storeName),
   });
@@ -174,7 +178,7 @@ export async function createDraftCampaign(
 
   return repo.createCampaign({
     productId: product.id,
-    name: input.name || `${product.name} — ${new Date().toLocaleDateString("en-GB", { month: "short", year: "numeric" })}`,
+    name: input.name || `${product.name} · ${new Date().toLocaleDateString("en-GB", { month: "short", year: "numeric" })}`,
     objective: input.config.objective,
     targetAudience: input.targetAudience || product.targetAudience,
     language: input.config.language,
@@ -371,7 +375,9 @@ export async function applyPinEdit(repo: UserRepository, pinId: string, input: P
     const preset = COLOR_PRESETS.find((c) => c.background === design.background && c.textColor === design.textColor && c.accentColor === design.accentColor);
     if (!preset) design = { ...design, background: pin.design.background, textColor: pin.design.textColor, accentColor: pin.design.accentColor };
   }
-  if (!features.allFontPresets && design.fontPreset !== "modern") design = { ...design, fontPreset: "modern" };
+  if (!features.allFontPresets && !BASIC_FONT_PRESETS.includes(design.fontPreset) && design.fontPreset !== pin.design.fontPreset) {
+    design = { ...design, fontPreset: "editorial" };
+  }
 
   const edited = new Set(pin.editedFields);
   for (const f of EDITABLE_PIN_FIELDS) {

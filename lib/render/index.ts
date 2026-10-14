@@ -3,7 +3,7 @@ import { createHash } from "node:crypto";
 import { Resvg } from "@resvg/resvg-js";
 import satori from "satori";
 import { PIN_HEIGHT, PIN_WIDTH } from "@/lib/pins/design";
-import { loadFonts } from "./fonts";
+import { loadFonts, loadGrain } from "./fonts";
 import { buildPinElement, type PinRenderInput } from "./templates";
 
 export type { PinRenderInput } from "./templates";
@@ -18,15 +18,16 @@ const CACHE_LIMIT = 64;
 const cache = new Map<string, Uint8Array>();
 
 function cacheKey(input: PinRenderInput, scale: number) {
-  const { image, ...rest } = input;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- the grain texture is constant
+  const { image, grain, ...rest } = input;
   return createHash("sha1")
     .update(JSON.stringify({ rest, scale, image: image ? createHash("sha1").update(image.dataUri).digest("hex") : null }))
     .digest("hex");
 }
 
 export async function renderPinSvg(input: PinRenderInput): Promise<string> {
-  const fonts = await loadFonts();
-  return satori(buildPinElement(input), { width: PIN_WIDTH, height: PIN_HEIGHT, fonts });
+  const [fonts, grain] = await Promise.all([loadFonts(), input.grain === undefined ? loadGrain() : Promise.resolve(input.grain)]);
+  return satori(buildPinElement({ ...input, grain }), { width: PIN_WIDTH, height: PIN_HEIGHT, fonts });
 }
 
 /** Render to PNG. `scale` < 1 produces smaller previews from the same layout. */

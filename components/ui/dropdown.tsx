@@ -14,7 +14,7 @@ export function DropdownMenuContent({ className, align = "end", ...props }: Reac
         align={align}
         sideOffset={6}
         className={cn(
-          "z-50 min-w-48 overflow-hidden rounded-lg border border-border bg-surface p-1 shadow-lg data-[state=open]:animate-in data-[state=open]:fade-in-0",
+          "z-50 min-w-48 overflow-hidden rounded-[3px] border border-foreground bg-surface p-1 shadow-[4px_4px_0_0_var(--foreground)] data-[state=open]:animate-in data-[state=open]:fade-in-0",
           className,
         )}
         {...props}
@@ -27,7 +27,7 @@ export function DropdownMenuItem({ className, ...props }: React.ComponentProps<t
   return (
     <Primitive.Item
       className={cn(
-        "flex cursor-pointer select-none items-center gap-2 rounded-md px-2.5 py-1.5 text-sm outline-none data-[highlighted]:bg-surface-muted data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:size-4 [&_svg]:text-muted-foreground",
+        "flex cursor-pointer select-none items-center gap-2 rounded-[2px] px-2.5 py-1.5 text-sm outline-none data-[highlighted]:bg-surface-muted data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:size-4 [&_svg]:text-muted-foreground",
         className,
       )}
       {...props}

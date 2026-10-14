@@ -18,10 +18,10 @@ export function Progress({ value, max = 100, label, className }: { value: number
       aria-valuemin={0}
       aria-valuemax={max}
       aria-valuenow={value}
-      className={cn("h-1.5 w-full overflow-hidden rounded-full bg-surface-muted", className)}
+      className={cn("h-2 w-full overflow-hidden rounded-[1px] bg-surface-muted", className)}
     >
       <div
-        className={cn("h-full rounded-full transition-[width]", pct >= 100 ? "bg-warning" : "bg-accent")}
+        className={cn("h-full transition-[width]", pct >= 100 ? "bg-ink-tomato" : "bg-accent")}
         style={{ width: `${pct}%` }}
       />
     </div>
@@ -53,20 +53,20 @@ export function Notice({
   action?: React.ReactNode;
 }) {
   const tones = {
-    info: "bg-info-soft text-info border-info/20",
-    warning: "bg-warning-soft text-warning border-warning/20",
-    danger: "bg-danger-soft text-danger border-danger/20",
-    accent: "bg-accent-soft text-accent-soft-foreground border-accent/20",
+    info: "bg-block-sky text-[#1b3a74] border-[#1b3a74]/25",
+    warning: "bg-block-butter text-[#5c3d06] border-[#5c3d06]/25",
+    danger: "bg-block-blush text-danger border-danger/30",
+    accent: "bg-block-mint text-accent-soft-foreground border-accent/30",
     neutral: "bg-surface-muted text-foreground border-border",
   } as const;
   return (
     <div
-      className={cn("flex items-start gap-3 rounded-lg border px-4 py-3 text-sm", tones[tone], className)}
+      className={cn("flex items-start gap-3 rounded-[3px] border px-4 py-3 text-sm", tones[tone], className)}
       role={tone === "danger" ? "alert" : "status"}
     >
       {icon ? <div className="mt-0.5 shrink-0 [&_svg]:size-4">{icon}</div> : null}
       <div className="min-w-0 flex-1 space-y-0.5">
-        {title ? <p className="font-medium">{title}</p> : null}
+        {title ? <p className="font-semibold">{title}</p> : null}
         {children ? <div className="text-[13px] leading-relaxed opacity-90">{children}</div> : null}
       </div>
       {action ? <div className="shrink-0">{action}</div> : null}
@@ -88,10 +88,10 @@ export function EmptyState({
   className?: string;
 }) {
   return (
-    <div className={cn("flex flex-col items-center justify-center rounded-lg border border-dashed border-border-strong bg-surface px-6 py-12 text-center", className)}>
-      {icon ? <div className="mb-3 rounded-full bg-accent-soft p-3 text-accent [&_svg]:size-5">{icon}</div> : null}
-      <h3 className="text-[15px] font-semibold">{title}</h3>
-      {description ? <p className="mt-1 max-w-md text-sm text-muted-foreground">{description}</p> : null}
+    <div className={cn("grid-paper flex flex-col items-center justify-center rounded-[4px] border border-border bg-surface px-6 py-14 text-center", className)}>
+      {icon ? <div className="mb-4 border border-foreground bg-block-mint p-3 text-foreground shadow-[3px_3px_0_0_var(--foreground)] [&_svg]:size-5">{icon}</div> : null}
+      <h3 className="font-display text-2xl">{title}</h3>
+      {description ? <p className="mt-2 max-w-md text-sm text-muted-foreground">{description}</p> : null}
       {action ? <div className="mt-5 flex flex-wrap items-center justify-center gap-2">{action}</div> : null}
     </div>
   );
@@ -111,8 +111,8 @@ export function PageHeader({
   return (
     <div className={cn("mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between", className)}>
       <div className="min-w-0">
-        <h1 className="text-xl font-semibold tracking-tight sm:text-2xl">{title}</h1>
-        {description ? <p className="mt-1 text-sm text-muted-foreground">{description}</p> : null}
+        <h1 className="font-display text-3xl sm:text-4xl">{title}</h1>
+        {description ? <p className="mt-2 text-sm text-muted-foreground">{description}</p> : null}
       </div>
       {actions ? <div className="flex flex-wrap items-center gap-2">{actions}</div> : null}
     </div>
@@ -121,9 +121,9 @@ export function PageHeader({
 
 export function Stat({ label, value, hint }: { label: string; value: React.ReactNode; hint?: React.ReactNode }) {
   return (
-    <div className="rounded-lg border border-border bg-surface p-4">
-      <p className="text-[13px] text-muted-foreground">{label}</p>
-      <p className="mt-1 text-2xl font-semibold tracking-tight tabular-nums">{value}</p>
+    <div className="rounded-[4px] border border-border bg-surface p-4">
+      <p className="text-[13px] font-medium text-muted-foreground">{label}</p>
+      <p className="font-display mt-2 text-4xl tabular-nums">{value}</p>
       {hint ? <p className="mt-1 text-xs text-muted-foreground">{hint}</p> : null}
     </div>
   );

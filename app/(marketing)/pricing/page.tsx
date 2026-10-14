@@ -33,8 +33,8 @@ export default function PricingPage() {
   ];
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-      <h1 className="text-3xl font-semibold tracking-tight">Pricing</h1>
+    <div className="mx-auto max-w-7xl px-4 py-16 sm:px-8">
+      <h1 className="font-display text-5xl sm:text-6xl">Pricing</h1>
       <p className="mt-2 max-w-2xl text-muted-foreground">
         Monthly subscriptions billed in euros through Stripe. Cancel any time from the billing portal; you keep access until the end of the paid period.
         Usage limits reset on the first day of each calendar month (UTC).
@@ -43,7 +43,7 @@ export default function PricingPage() {
         <PricingCards />
       </div>
 
-      <h2 className="mt-16 text-xl font-semibold">Compare plans</h2>
+      <h2 className="font-display mt-20 text-4xl">Compare plans</h2>
       <div className="mt-4 rounded-lg border border-border bg-surface">
         <Table>
           <THead>

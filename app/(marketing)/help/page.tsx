@@ -78,7 +78,7 @@ const topics = [
 export default function HelpPage() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
-      <h1 className="text-3xl font-semibold tracking-tight">Help</h1>
+      <h1 className="font-display text-5xl sm:text-6xl">Help</h1>
       <p className="mt-2 text-muted-foreground">How the core workflows in {brand.name} work.</p>
       <div className="mt-10 grid gap-10 md:grid-cols-[200px_1fr]">
         <nav aria-label="Help topics" className="md:sticky md:top-24 md:self-start">
@@ -96,7 +96,7 @@ export default function HelpPage() {
         <div className="space-y-12">
           {topics.map((t) => (
             <section key={t.id} id={t.id} className="scroll-mt-24">
-              <h2 className="text-lg font-semibold">{t.title}</h2>
+              <h2 className="font-display text-3xl">{t.title}</h2>
               <div className="mt-3">
                 <Prose>{t.body}</Prose>
               </div>

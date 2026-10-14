@@ -1,32 +1,36 @@
-import { FONT_PRESETS, IMAGE_PLACEMENTS, TEMPLATE_IDS, type PinDesign, type TemplateId } from "@/types/domain";
+import { FONT_PRESETS, IMAGE_PLACEMENTS, TEMPLATE_IDS, type FontPreset, type PinDesign, type TemplateId } from "@/types/domain";
 
 export const PIN_WIDTH = 1000;
 export const PIN_HEIGHT = 1500;
 
 export const TEMPLATE_META: Record<TemplateId, { name: string; description: string; usesBullets: boolean }> = {
-  minimal: { name: "Minimal typography", description: "A single strong headline with generous space.", usesBullets: false },
-  editorial: { name: "Editorial feature", description: "Magazine-style serif headline over a product image.", usesBullets: false },
-  benefits: { name: "Benefits", description: "Headline plus three short benefits.", usesBullets: true },
-  problem_solution: { name: "Problem → solution", description: "Names the problem, then presents the product as the fix.", usesBullets: false },
-  checklist: { name: "Checklist", description: "A tick-list of what's inside or what it helps with.", usesBullets: true },
-  mockup: { name: "Product showcase", description: "Large product image framed like a mockup card.", usesBullets: false },
+  minimal: { name: "Paper note", description: "Big serif headline, a taped-on product photo and a hand-drawn underline.", usesBullets: false },
+  editorial: { name: "Magazine cover", description: "Full-bleed product image with an editorial headline panel.", usesBullets: false },
+  benefits: { name: "Sticky notes", description: "Headline plus up to three short benefits on sticky notes.", usesBullets: true },
+  problem_solution: { name: "Note to self", description: "The problem as a handwritten note, then the product as the answer.", usesBullets: false },
+  checklist: { name: "To-do list", description: "A notebook page with hand-ticked checklist items.", usesBullets: true },
+  mockup: { name: "Product showcase", description: "Framed product image on an offset colour block with a sticker.", usesBullets: false },
 };
 
+/** Print-inspired palettes. Text/background pairs keep WCAG AA contrast. */
 export const COLOR_PRESETS: { name: string; background: string; textColor: string; accentColor: string }[] = [
-  { name: "Sage", background: "#f4f1ea", textColor: "#24302a", accentColor: "#4f7a5f" },
-  { name: "Charcoal", background: "#22262a", textColor: "#f6f3ec", accentColor: "#c9a86a" },
-  { name: "Blush", background: "#f8ece8", textColor: "#3b2a2a", accentColor: "#b8635a" },
-  { name: "Sky", background: "#e9f0f5", textColor: "#1e2d3a", accentColor: "#3c6188" },
-  { name: "Sand", background: "#efe6d8", textColor: "#3a3027", accentColor: "#9a6b1c" },
-  { name: "Paper", background: "#ffffff", textColor: "#1f2421", accentColor: "#1f2421" },
+  { name: "Cream & ink", background: "#f6f1e7", textColor: "#13203a", accentColor: "#167a4a" },
+  { name: "Sage", background: "#e2e9d8", textColor: "#1f2a1f", accentColor: "#b5532f" },
+  { name: "Blush", background: "#f6e0d8", textColor: "#3a1f1c", accentColor: "#c2462e" },
+  { name: "Sky", background: "#dce9f5", textColor: "#13203a", accentColor: "#d9482f" },
+  { name: "Butter", background: "#f7ecbf", textColor: "#2b2412", accentColor: "#167a4a" },
+  { name: "Night", background: "#1c2337", textColor: "#f6f1e7", accentColor: "#f0bf2e" },
 ];
+
+/** Typography presets included on every plan; the rest need Growth or Pro. */
+export const BASIC_FONT_PRESETS: FontPreset[] = ["editorial", "modern"];
 
 export const DEFAULT_DESIGN: PinDesign = {
   template: "minimal",
   background: COLOR_PRESETS[0].background,
   textColor: COLOR_PRESETS[0].textColor,
   accentColor: COLOR_PRESETS[0].accentColor,
-  fontPreset: "modern",
+  fontPreset: "editorial",
   imagePlacement: "auto",
   imageIndex: 0,
   showStoreName: false,
@@ -70,5 +74,5 @@ export function contrastRatio(a: string, b: string): number {
 /** Pick black or white text for a given background when contrast is too low. */
 export function readableTextColor(background: string, preferred: string): string {
   if (contrastRatio(background, preferred) >= 4.5) return preferred;
-  return contrastRatio(background, "#1f2421") >= contrastRatio(background, "#ffffff") ? "#1f2421" : "#ffffff";
+  return contrastRatio(background, "#13203a") >= contrastRatio(background, "#ffffff") ? "#13203a" : "#ffffff";
 }

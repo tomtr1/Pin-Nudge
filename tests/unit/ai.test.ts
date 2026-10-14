@@ -101,3 +101,29 @@ describe("demo provider", () => {
     expect(regen.data.title).not.toBe(normalized[0].title);
   });
 });
+
+describe("human-sounding copy", () => {
+  const BANNED = /—|whether you're|say goodbye|unlock|elevate|game-changer|seamless|effortless|look no further|next level|ultimate|must-have/i;
+
+  it("demo copy avoids common machine-written patterns", async () => {
+    const p = createDemoProvider();
+    const angles = await p.generateAngles({ ...ctx, config: { ...ctx.config, angleCount: 6 } }, 6);
+    const pins = await p.generatePins(ctx, angles.data, 18);
+    for (const pin of pins.data) {
+      for (const field of [pin.title, pin.description, pin.headline, pin.subheadline, ...pin.bullets]) {
+        expect(field, field).not.toMatch(BANNED);
+      }
+      // Sentence case headlines: not every word capitalised.
+      const words = pin.headline.split(" ").filter((w) => /^[a-z]/i.test(w));
+      if (words.length > 3) expect(words.every((w) => /^[A-Z]/.test(w)), pin.headline).toBe(false);
+    }
+    const descriptionStarts = new Set(pins.data.map((d) => d.description.split(" ").slice(0, 3).join(" ")));
+    expect(descriptionStarts.size).toBeGreaterThan(3);
+  });
+
+  it("tells the model to avoid AI tells and write in sentence case", () => {
+    expect(SYSTEM_PROMPT).toMatch(/sentence case/i);
+    expect(SYSTEM_PROMPT).toMatch(/no em dashes/i);
+    expect(SYSTEM_PROMPT).toMatch(/Whether you're/);
+  });
+});

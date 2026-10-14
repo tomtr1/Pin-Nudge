@@ -1,4 +1,5 @@
 import "server-only";
+import { CATEGORY_KICKERS } from "@/lib/constants";
 import type { UserRepository } from "@/lib/data";
 import type { Pin, PinDesign, Product, Profile } from "@/types/domain";
 import { toDataUri, type PinRenderInput } from "./index";
@@ -27,5 +28,6 @@ export async function renderInputForPin(
     storeName: profile?.storeName ?? null,
     design: pin.design,
     image: await loadImage(repo, product, pin.design),
+    kicker: product ? (CATEGORY_KICKERS[product.category] ?? CATEGORY_KICKERS.other) : null,
   };
 }

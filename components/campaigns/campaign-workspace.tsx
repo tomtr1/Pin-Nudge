@@ -222,7 +222,7 @@ function CampaignHeader({ campaign }: { campaign: CampaignWithDetails }) {
               <Button type="button" variant="ghost" onClick={() => { setName(campaign.name); setRenaming(false); }}>Cancel</Button>
             </form>
           ) : (
-            <h1 className="text-xl font-semibold tracking-tight sm:text-2xl">{campaign.name}</h1>
+            <h1 className="font-display text-4xl sm:text-5xl">{campaign.name}</h1>
           )}
           <div className="mt-2 flex flex-wrap items-center gap-1.5">
             <CampaignStatusBadge status={campaign.status} />
@@ -317,7 +317,7 @@ export function CampaignWorkspace({ campaign, features, imageCount, regeneration
         <div className="grid gap-6 lg:grid-cols-[1fr_280px]">
           <div>
             <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-              <h2 className="text-lg font-semibold">Review and edit pins</h2>
+              <h2 className="font-display text-3xl">Review and edit pins</h2>
               <Button
                 variant="subtle"
                 disabled={drafts === 0 || approving}

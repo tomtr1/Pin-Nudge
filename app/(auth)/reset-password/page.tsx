@@ -12,7 +12,7 @@ export default async function ResetPasswordPage() {
   return (
     <Card>
       <CardHeader>
-        <h1 className="text-xl font-semibold tracking-tight">Choose a new password</h1>
+        <h1 className="font-display text-4xl">Choose a new password</h1>
       </CardHeader>
       <CardContent>
         {user?.mode === "supabase" ? (

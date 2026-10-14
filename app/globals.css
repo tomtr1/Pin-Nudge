@@ -2,34 +2,55 @@
 @import "tw-animate-css";
 
 /*
- * PinNudge design tokens. Neutral off-white surfaces, charcoal type and a
- * restrained muted green accent. Dark mode is intentionally not offered in the
- * first release; the product renders in a single, tested light theme.
+ * PinNudge design tokens.
+ *
+ * Editorial and print-inspired rather than "AI dashboard": deep ink text on
+ * warm white, an editorial serif for headings, square corners, flat colour
+ * blocks and grid-paper panels. No gradients, no glow, no soft blurred cards.
+ * The product renders in a single, tested light theme.
  */
 :root {
-  --background: #f7f7f4;
-  --foreground: #1f2421;
+  --background: #fbfaf7;
+  --foreground: #13203a;
   --surface: #ffffff;
-  --surface-muted: #f0f0ec;
-  --border: #e3e3dd;
-  --border-strong: #cfd0c8;
-  --muted-foreground: #6b716c;
-  --accent: #4f7a5f;
-  --accent-hover: #44694f;
+  --surface-muted: #f3f1ec;
+  --border: #e2e0d8;
+  --border-strong: #13203a;
+  --muted-foreground: #4f586b;
+
+  /* Action colour: a deep, saturated PinNudge green. */
+  --accent: #167a4a;
+  --accent-hover: #0f6139;
   --accent-foreground: #ffffff;
-  --accent-soft: #e3ece5;
-  --accent-soft-foreground: #2f4d3a;
-  --danger: #b4483c;
-  --danger-soft: #f8e7e4;
-  --warning: #9a6b1c;
-  --warning-soft: #f7efdf;
-  --info: #3c6188;
-  --info-soft: #e5edf5;
-  --ring: #4f7a5f;
+  --accent-soft: #dcf3d3;
+  --accent-soft-foreground: #0f4d2e;
+
+  /* Flat colour blocks used for sections and illustrations. */
+  --block-mint: #dcf3d3;
+  --block-mint-line: #bfe4b2;
+  --block-blush: #fde1d9;
+  --block-blush-line: #f6bfb0;
+  --block-sky: #d7e8fb;
+  --block-sky-line: #afcdf1;
+  --block-butter: #fbf2c0;
+  --block-butter-line: #ecdc8d;
+
+  /* Illustration inks. */
+  --ink-tomato: #e4573d;
+  --ink-cobalt: #2a55d6;
+  --ink-sun: #f0bf2e;
+
+  --danger: #b33a2b;
+  --danger-soft: #fbe5e1;
+  --warning: #8a5c0f;
+  --warning-soft: #fbf1d6;
+  --info: #23488f;
+  --info-soft: #e3ecfa;
+  --ring: #2a55d6;
   /* Chart series colour: brand green, saturated enough to pass the chart chroma floor. */
   --chart-1: #2f7d4f;
-  --chart-grid: #e8e8e3;
-  --radius: 0.625rem;
+  --chart-grid: #e8e6df;
+  --radius: 0.25rem;
 }
 
 @theme inline {
@@ -45,6 +66,13 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-accent-soft: var(--accent-soft);
   --color-accent-soft-foreground: var(--accent-soft-foreground);
+  --color-block-mint: var(--block-mint);
+  --color-block-blush: var(--block-blush);
+  --color-block-sky: var(--block-sky);
+  --color-block-butter: var(--block-butter);
+  --color-ink-tomato: var(--ink-tomato);
+  --color-ink-cobalt: var(--ink-cobalt);
+  --color-ink-sun: var(--ink-sun);
   --color-danger: var(--danger);
   --color-danger-soft: var(--danger-soft);
   --color-warning: var(--warning);
@@ -53,12 +81,13 @@
   --color-info-soft: var(--info-soft);
   --color-ring: var(--ring);
   --color-chart-1: var(--chart-1);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: 2px;
+  --radius-md: 3px;
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-display: "DM Serif Display", Georgia, "Times New Roman", serif;
+  --radius-xl: 6px;
+  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Newsreader", Georgia, "Times New Roman", serif;
+  --font-hand: "Caveat", "Comic Sans MS", cursive;
 }
 
 @layer base {
@@ -72,14 +101,55 @@
     background: var(--background);
     color: var(--foreground);
     font-family: var(--font-sans);
-    font-feature-settings: "cv11", "ss01";
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
   }
   :focus-visible {
     outline: 2px solid var(--ring);
     outline-offset: 2px;
   }
   ::selection {
-    background: var(--accent-soft);
+    background: var(--block-butter);
+  }
+}
+
+@layer components {
+  /* Editorial serif headings with tight, print-like tracking. */
+  .font-display {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.035em;
+    line-height: 0.98;
+  }
+
+  /* Grid-paper panel. Set --grid-line to tint it, e.g. var(--block-mint-line). */
+  .grid-paper {
+    --grid-line: var(--border);
+    background-image:
+      linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+    background-size: 22px 22px;
+    background-position: -1px -1px;
+  }
+
+  .block-mint {
+    background-color: var(--block-mint);
+    --grid-line: var(--block-mint-line);
+  }
+  .block-blush {
+    background-color: var(--block-blush);
+    --grid-line: var(--block-blush-line);
+  }
+  .block-sky {
+    background-color: var(--block-sky);
+    --grid-line: var(--block-sky-line);
+  }
+  .block-butter {
+    background-color: var(--block-butter);
+    --grid-line: var(--block-butter-line);
   }
 }
 

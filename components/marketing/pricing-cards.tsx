@@ -27,18 +27,18 @@ export function PricingCards({
           <div
             key={id}
             className={cn(
-              "flex flex-col rounded-xl border bg-surface p-6",
-              plan.highlight ? "border-accent shadow-[0_8px_24px_rgba(79,122,95,0.15)]" : "border-border",
+              "flex flex-col rounded-[4px] border bg-surface p-6",
+              plan.highlight ? "border-foreground shadow-[6px_6px_0_0_var(--foreground)]" : "border-border",
             )}
           >
             <div className="flex items-center justify-between gap-2">
-              <h3 className="text-lg font-semibold">{plan.name}</h3>
-              {plan.highlight ? <Badge tone="accent">Most popular</Badge> : null}
+              <h3 className="font-display text-3xl">{plan.name}</h3>
+              {plan.highlight ? <Badge tone="solid">Most popular</Badge> : null}
               {isCurrent ? <Badge tone="solid">Current plan</Badge> : null}
             </div>
             <p className="mt-1 text-sm text-muted-foreground">{plan.description}</p>
             <p className="mt-5">
-              <span className="text-3xl font-semibold tracking-tight">{formatPrice(plan.priceMonthlyEur)}</span>
+              <span className="font-display text-5xl">{formatPrice(plan.priceMonthlyEur)}</span>
               <span className="text-sm text-muted-foreground"> / month</span>
             </p>
             <ul className="mt-5 flex-1 space-y-2.5 text-sm">

@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Field, Input, Select, Textarea } from "@/components/ui/input";
 import { Notice, Spinner } from "@/components/ui/misc";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { COLOR_PRESETS, contrastRatio, TEMPLATE_META } from "@/lib/pins/design";
+import { BASIC_FONT_PRESETS, COLOR_PRESETS, contrastRatio, TEMPLATE_META } from "@/lib/pins/design";
 import { cn } from "@/lib/utils";
 import { FONT_PRESETS, IMAGE_PLACEMENTS, type FontPreset, type ImagePlacement, type Pin, type PinDesign, type PlanId, type TemplateId } from "@/types/domain";
 import { UpgradeHint } from "@/components/campaigns/upgrade-hint";
@@ -54,7 +54,7 @@ function fromPin(p: Pin): FormState {
   };
 }
 
-const FONT_LABELS: Record<FontPreset, string> = { modern: "Modern sans", editorial: "Editorial serif", classic: "Classic serif", bold: "Bold display" };
+const FONT_LABELS: Record<FontPreset, string> = { editorial: "Editorial serif", modern: "Clean sans", classic: "Classic serif", bold: "Bold display" };
 const PLACEMENT_LABELS: Record<ImagePlacement, string> = { auto: "Template default", top: "Top", middle: "Middle", bottom: "Bottom", none: "No image" };
 
 function Counter({ value, max }: { value: string; max: number }) {
@@ -356,7 +356,7 @@ export function PinEditor({
               <Field label="Typography" htmlFor="pin-font" hint={!features.allFontPresets ? "More presets on Growth and Pro." : undefined}>
                 <Select id="pin-font" value={form.design.fontPreset} onChange={(e) => setDesign("fontPreset", e.target.value as FontPreset)}>
                   {FONT_PRESETS.map((f) => (
-                    <option key={f} value={f} disabled={!features.allFontPresets && f !== "modern"}>{FONT_LABELS[f]}</option>
+                    <option key={f} value={f} disabled={!features.allFontPresets && !BASIC_FONT_PRESETS.includes(f) && f !== pin.design.fontPreset}>{FONT_LABELS[f]}</option>
                   ))}
                 </Select>
               </Field>

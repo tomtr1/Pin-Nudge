@@ -11,9 +11,9 @@ export const DialogTrigger = DialogPrimitive.Trigger;
 export const DialogClose = DialogPrimitive.Close;
 
 const overlayClass =
-  "fixed inset-0 z-50 bg-foreground/30 data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=closed]:animate-out data-[state=closed]:fade-out-0";
+  "fixed inset-0 z-50 bg-foreground/40 data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=closed]:animate-out data-[state=closed]:fade-out-0";
 const contentClass =
-  "fixed left-1/2 top-1/2 z-50 grid max-h-[90vh] w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2 gap-4 overflow-y-auto rounded-xl border border-border bg-surface p-6 shadow-xl data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95";
+  "fixed left-1/2 top-1/2 z-50 grid max-h-[90vh] w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2 gap-4 overflow-y-auto rounded-[4px] border border-foreground bg-surface p-6 shadow-[6px_6px_0_0_var(--foreground)] data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95";
 
 export function DialogContent({
   className,
@@ -43,7 +43,7 @@ export function DialogFooter({ className, ...props }: React.HTMLAttributes<HTMLD
   return <div className={cn("flex flex-col-reverse gap-2 sm:flex-row sm:justify-end", className)} {...props} />;
 }
 export function DialogTitle({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Title>) {
-  return <DialogPrimitive.Title className={cn("text-base font-semibold", className)} {...props} />;
+  return <DialogPrimitive.Title className={cn("font-display text-2xl", className)} {...props} />;
 }
 export function DialogDescription({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Description>) {
   return <DialogPrimitive.Description className={cn("text-sm text-muted-foreground", className)} {...props} />;
@@ -76,7 +76,7 @@ export function ConfirmDialog({
         <AlertPrimitive.Overlay className={overlayClass} />
         <AlertPrimitive.Content className={cn(contentClass, "max-w-md")}>
           <div className="space-y-1">
-            <AlertPrimitive.Title className="text-base font-semibold">{title}</AlertPrimitive.Title>
+            <AlertPrimitive.Title className="font-display text-2xl">{title}</AlertPrimitive.Title>
             <AlertPrimitive.Description className="text-sm text-muted-foreground">{description}</AlertPrimitive.Description>
           </div>
           <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">

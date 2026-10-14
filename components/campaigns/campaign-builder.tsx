@@ -145,7 +145,7 @@ export function CampaignBuilder({ products, initialProductId, limits, templates,
           <CardContent className="space-y-5 pt-6">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <h2 className="text-lg font-semibold">Which product are you promoting?</h2>
+                <h2 className="font-display text-3xl">Which product are you promoting?</h2>
                 <p className="text-sm text-muted-foreground">Choose from your library or add a new product.</p>
               </div>
               <Button variant="secondary" onClick={() => setAddingProduct(true)}>
@@ -209,7 +209,7 @@ export function CampaignBuilder({ products, initialProductId, limits, templates,
         <Card>
           <CardContent className="space-y-6 pt-6">
             <div>
-              <h2 className="text-lg font-semibold">Define the campaign</h2>
+              <h2 className="font-display text-3xl">Define the campaign</h2>
               <p className="text-sm text-muted-foreground">
                 For <span className="font-medium text-foreground">{product?.name}</span>. Sensible defaults are filled in — adjust what matters to you.
               </p>

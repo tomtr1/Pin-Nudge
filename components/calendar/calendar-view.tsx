@@ -177,7 +177,7 @@ export function CalendarView({ month, planned, unplanned, today }: { month: stri
       {planned.length === 0 ? <p className="text-sm text-muted-foreground">Nothing planned this month yet.</p> : null}
 
       <div className="rounded-lg border border-border bg-surface p-5">
-        <h2 className="font-semibold">Approved pins without a date</h2>
+        <h2 className="font-display text-3xl">Approved pins without a date</h2>
         <p className="text-sm text-muted-foreground">Give each pin a day to publish it. Spreading pins out over several weeks keeps your profile active.</p>
         {unplanned.length === 0 ? (
           <p className="mt-4 text-sm text-muted-foreground">All approved pins have dates. Approve more pins in your campaigns to plan them here.</p>

@@ -139,7 +139,7 @@ export function AngleStep({ campaign, regenerationsRemaining }: { campaign: Camp
       <CardContent className="space-y-5 pt-6">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
           <div>
-            <h2 className="text-lg font-semibold">Review the marketing angles</h2>
+            <h2 className="font-display text-3xl">Review the marketing angles</h2>
             <p className="text-sm text-muted-foreground">
               Each angle targets a different audience or need. Edit them, untick any you don't want, then generate the pins.
             </p>

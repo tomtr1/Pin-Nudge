@@ -79,7 +79,7 @@ describe("design helpers", () => {
   });
   it("guarantees readable text contrast", () => {
     expect(contrastRatio("#000000", "#ffffff")).toBeCloseTo(21, 0);
-    expect(readableTextColor("#ffffff", "#f0f0f0")).toBe("#1f2421");
+    expect(readableTextColor("#ffffff", "#f0f0f0")).toBe("#13203a");
     for (const p of COLOR_PRESETS) expect(contrastRatio(p.background, p.textColor)).toBeGreaterThanOrEqual(4.5);
   });
 });

@@ -18,7 +18,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
   return (
     <Card>
       <CardHeader>
-        <h1 className="text-xl font-semibold tracking-tight">Welcome back</h1>
+        <h1 className="font-display text-4xl">Welcome back</h1>
         <p className="text-sm text-muted-foreground">Log in to continue planning your pins.</p>
       </CardHeader>
       <CardContent className="space-y-4">

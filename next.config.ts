@@ -40,7 +40,7 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   serverExternalPackages: ["@resvg/resvg-js"],
   outputFileTracingIncludes: {
-    "/api/**/*": ["./assets/fonts/**/*"],
+    "/api/**/*": ["./assets/fonts/**/*", "./assets/textures/**/*"],
   },
   experimental: {
     serverActions: {

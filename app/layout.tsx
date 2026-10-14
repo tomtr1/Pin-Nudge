@@ -1,9 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import "@fontsource/inter/400.css";
-import "@fontsource/inter/500.css";
-import "@fontsource/inter/600.css";
-import "@fontsource/inter/700.css";
-import "@fontsource/dm-serif-display/400.css";
+import "@fontsource/instrument-sans/400.css";
+import "@fontsource/instrument-sans/500.css";
+import "@fontsource/instrument-sans/600.css";
+import "@fontsource/instrument-sans/700.css";
+import "@fontsource/newsreader/400.css";
+import "@fontsource/newsreader/500.css";
+import "@fontsource/newsreader/400-italic.css";
+import "@fontsource/caveat/600.css";
 import "./globals.css";
 import { Toaster } from "sonner";
 import { brand, getAppUrl } from "@/lib/brand";
@@ -25,7 +28,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f7f7f4",
+  themeColor: "#fbfaf7",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -37,7 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           position="bottom-right"
           toastOptions={{
             classNames: {
-              toast: "!rounded-lg !border !border-border !bg-surface !text-foreground !shadow-lg",
+              toast: "!rounded-[3px] !border !border-foreground !bg-surface !text-foreground !shadow-[4px_4px_0_0_var(--foreground)]",
               description: "!text-muted-foreground",
             },
           }}
