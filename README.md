@@ -25,6 +25,7 @@ The core flow: **product → distinct marketing angles → AI-written pins → e
 11. [Integrations requiring third-party approval](#integrations-requiring-third-party-approval)
 12. [Known limitations](#known-limitations)
 13. [Brand configuration & renaming](#brand-configuration--renaming)
+14. [iPhone app](#iphone-app)
 
 ---
 
@@ -291,3 +292,27 @@ The name, tagline, disclaimer, colours, slug and URL logic live in **`lib/brand/
 2. Update the mark in `components/brand/logo.tsx` and `app/icon.svg`.
 3. UI copy reads `brand.name`; the remaining literal mentions are in code comments, tests, the README and `supabase/config.toml`. Find them with `grep -rn "PinNudge" .  --exclude-dir=node_modules --exclude-dir=.next`.
 4. Set `NEXT_PUBLIC_APP_URL` to the new domain and update Supabase/Stripe URLs.
+
+---
+
+## iPhone app
+
+`mobile/` contains a native iOS app (Expo SDK 57, React Native, Expo Router) that uses the same accounts and data as the website. It covers products with photo upload, campaign building, angle review, pin generation, a pin editor with server-rendered live preview, save to Photos / share sheet, statuses, the calendar and in-app account deletion.
+
+- **Develop / try it on your phone:** [`mobile/README.md`](mobile/README.md)
+- **Publish to the App Store (step by step, no Mac needed):** [`docs/APP_STORE.md`](docs/APP_STORE.md)
+
+The app talks to the web app's JSON API at `/api/mobile/v1`. The routes call the same operations (`lib/operations/*`) as the website's Server Actions, so validation, plan limits, quotas and rate limits are identical. Requests authenticate with `Authorization: Bearer <token>`: a Supabase access token (validated with Supabase Auth, with RLS applied through a user-scoped client), or the signed demo token in local mode. The app is a free companion to the web subscription: the API sends plan-limit messages to it in neutral wording, without purchase prompts (App Review guideline 3.1.3(f)).
+
+| Endpoint | Purpose |
+| --- | --- |
+| `GET /status` | Public server info (auth mode, AI mode, disclaimer) |
+| `POST /auth/sign-in`, `/auth/sign-up`, `/auth/refresh`, `/auth/sign-out`, `/auth/reset-password` | Token sessions (Supabase mode) |
+| `POST /auth/local-demo` | Demo token (local mode only) |
+| `GET/DELETE /me`, `PUT /me/profile`, `POST /me/onboarding` | Account summary, deletion, profile |
+| `GET/POST /products`, `POST /products/sample`, `GET/PUT/DELETE /products/:id`, `POST /products/:id/images`, `DELETE /products/:id/images/:index` | Products and photos |
+| `GET/POST /campaigns`, `GET/PATCH/DELETE /campaigns/:id`, `POST /campaigns/:id/angles`, `/pins`, `/approve-all`, `PUT /angles/:id` | Campaigns and angles |
+| `GET /pins`, `GET/PUT/DELETE /pins/:id`, `POST /pins/:id/regenerate`, `/duplicate`, `PUT /pins/:id/status`, `/planned-date` | Pins and calendar |
+
+Pin images use the existing `/api/pins/:id/image` and `/api/pins/:id/preview` routes, which accept the bearer token too. Tests: `tests/unit/mobile-api.test.ts`, `e2e/mobile-api.spec.ts` (runs on its own server instance), the bearer-token RLS test in `tests/integration/supabase-rls.test.ts`, and `tests/unit/mobile-shared.test.ts` (keeps `mobile/src/shared` in sync).
+

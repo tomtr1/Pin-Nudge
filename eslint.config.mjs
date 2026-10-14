@@ -11,7 +11,10 @@ const eslintConfig = defineConfig([
       "react/no-unescaped-entities": "off",
     },
   },
-  globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts", ".data/**", "playwright-report/**", "test-results/**", "coverage/**"]),
+  globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts", ".data/**", "playwright-report/**", "test-results/**", "coverage/**",
+    // The iOS app is a separate Expo package with its own lint config (mobile/eslint.config.js).
+    "mobile/**",
+  ]),
 ]);
 
 export default eslintConfig;

@@ -39,6 +39,14 @@ export default function PrivacyPage() {
           <li>It does not sell personal data or use it for advertising.</li>
         </ul>
 
+        <h2>The iPhone app</h2>
+        <ul>
+          <li>The app uses the same account and stores the same data as the website. It has no advertising, analytics or tracking SDKs.</li>
+          <li>Your sign-in session is kept in the iOS Keychain on your device only.</li>
+          <li>Photo access is used only when you choose product photos to upload, and add-only access only when you save a pin to your photo library.</li>
+          <li>You can delete your account in the app under Account → Delete account.</li>
+        </ul>
+
         <h2>Your controls</h2>
         <ul>
           <li>Edit your profile, products and campaigns at any time.</li>
