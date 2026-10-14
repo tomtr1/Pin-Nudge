@@ -29,9 +29,15 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
         title="Products"
         description={`${usage.products.used} of ${usage.products.limit} products on your ${usage.entitlement.plan.name} plan.`}
         actions={
-          <Button asChild disabled={!usage.products.allowed}>
-            <Link href="/products/new"><Plus /> Add product</Link>
-          </Button>
+          usage.products.allowed ? (
+            <Button asChild>
+              <Link href="/products/new"><Plus /> Add product</Link>
+            </Button>
+          ) : (
+            <Button asChild variant="secondary">
+              <Link href="/settings#billing">Product limit reached — upgrade</Link>
+            </Button>
+          )
         }
       />
 

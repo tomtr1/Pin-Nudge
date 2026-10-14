@@ -68,7 +68,8 @@ function stateFor(dir: string): StoreState {
 }
 
 export function localDataDir(): string {
-  return path.resolve(process.env.PINNUDGE_LOCAL_DATA_DIR || path.join(process.cwd(), ".data"));
+  // Runtime-only location for demo data; excluded from output file tracing.
+  return path.resolve(/*turbopackIgnore: true*/ process.env.PINNUDGE_LOCAL_DATA_DIR || path.join(process.cwd(), ".data"));
 }
 
 async function load(s: StoreState): Promise<LocalDb> {

@@ -19,7 +19,7 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   serverExternalPackages: ["@resvg/resvg-js"],
   outputFileTracingIncludes: {
-    "/**": ["./assets/fonts/**/*"],
+    "/api/**/*": ["./assets/fonts/**/*"],
   },
   experimental: {
     serverActions: {

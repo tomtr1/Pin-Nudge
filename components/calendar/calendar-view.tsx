@@ -18,6 +18,13 @@ import type { Pin } from "@/types/domain";
 export type CalendarPin = Pin & { campaignName: string };
 
 const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+/** Deterministic label (server and browser Intl output can differ, breaking hydration). */
+function dayLabel(day: string) {
+  const d = new Date(`${day}T00:00:00Z`);
+  return `${WEEKDAYS[(d.getUTCDay() + 6) % 7]} ${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]}`;
+}
 
 function monthGrid(month: string): string[] {
   const [y, m] = month.split("-").map(Number);
@@ -140,7 +147,7 @@ export function CalendarView({ month, planned, unplanned, today }: { month: stri
             return (
               <div key={day} className={cn("min-h-24 border-b border-r border-border p-1.5", pins.length === 0 && "hidden sm:block")}>
                 <p className={cn("mb-1 text-xs", day === today ? "inline-flex size-5 items-center justify-center rounded-full bg-accent font-semibold text-accent-foreground" : "text-muted-foreground")}>
-                  <span className="sm:hidden">{new Date(day + "T00:00:00Z").toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short", timeZone: "UTC" })}</span>
+                  <span className="sm:hidden">{dayLabel(day)}</span>
                   <span className="hidden sm:inline">{Number(day.slice(8))}</span>
                 </p>
                 <ul className="space-y-1">

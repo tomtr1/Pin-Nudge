@@ -303,6 +303,11 @@ export function PinEditor({
                 {features.templates.map((t) => (
                   <option key={t} value={t}>{TEMPLATE_META[t].name}</option>
                 ))}
+                {!features.templates.includes(form.design.template) ? (
+                  <option value={form.design.template} disabled>
+                    {TEMPLATE_META[form.design.template].name} (not on your plan)
+                  </option>
+                ) : null}
               </Select>
             </Field>
             <fieldset>

@@ -364,7 +364,7 @@ export async function applyPinEdit(repo: UserRepository, pinId: string, input: P
   const features = entitlement.plan.features;
 
   let design = input.design;
-  if (!features.templates.includes(design.template)) {
+  if (!features.templates.includes(design.template) && design.template !== pin.design.template) {
     throw new CampaignRuleError("That template isn't included in your plan.");
   }
   if (!features.customColors) {
